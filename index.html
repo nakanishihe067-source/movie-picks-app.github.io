@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Picks</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+
+    <header class="app-header">
+      <a class="brand" href="#feed"><span class="brand-mark">M</span><span>Movie Picks</span></a>
+      <nav class="nav-tabs" aria-label="メインメニュー">
+        <button class="nav-tab is-active" type="button" data-view="feed">投稿</button>
+        <button class="nav-tab" type="button" data-view="search">検索</button>
+        <button class="nav-tab" type="button" data-view="create">作成</button>
+      </nav>
+    </header>
+
+    <main>
+
+      <section id="feed" class="page-view is-active">
+        <div class="section-heading">
+          <div><p class="eyebrow">Today</p><h1>映画をもっと見たくなる投稿</h1></div>
+        </div>
+        <p class="hint feed-hint">上の「検索」タブから、映画名や紹介文で投稿を探せます。</p>
+        <div id="postGrid" class="post-grid"></div>
+      </section>
+
+      <section id="search" class="page-view" hidden>
+        <section class="topbar" aria-label="検索">
+          <form id="searchForm" class="search-bar" role="search">
+            <label for="searchInput" class="visually-hidden">投稿を検索</label>
+            <input id="searchInput" type="search" placeholder="映画名や紹介文で検索" autocomplete="off" />
+          </form>
+        </section>
+        <div class="section-heading">
+          <div><p class="eyebrow">Search</p><h1>サムネイルで探す</h1></div>
+        </div>
+        <p class="hint feed-hint">インスタみたいなグリッドで、投稿全体のサムネを探せます。</p>
+        <div id="searchGrid" class="search-grid"></div>
+      </section>
+
+      <section id="create" class="create-section page-view" hidden>
+        <div class="section-heading create-heading">
+          <div><p class="eyebrow">Create</p><h2>投稿を作成</h2></div>
+          <div class="section-actions">
+            <button id="backToFeedBtn" class="secondary-btn" type="button">投稿一覧へ戻る</button>
+          </div>
+        </div>
+        <p class="hint">文字と画像URLを入れるだけで投稿カードを追加できます。</p>
+        <div class="creator-layout">
+          <form id="postForm" class="creator-panel">
+            <div class="field"><label for="postTitle">投稿タイトル</label><input id="postTitle" name="postTitle" placeholder="例：夜にひとりで観たい映画5選" required /></div>
+            <div class="field"><label for="postLead">ひとこと</label><textarea id="postLead" name="postLead" rows="3" placeholder="投稿の雰囲気やおすすめポイント"></textarea></div>
+            <div class="field">
+              <label>表紙画像</label>
+              <div class="file-input-wrapper">
+                <span class="file-input-btn">
+                  画像を選択する
+                  <input type="file" id="coverImageFile" accept="image/*" />
+                </span>
+                <input type="hidden" id="imageUrl" name="imageUrl" value="" />
+              </div>
+            </div>
+            <div class="field"><label for="accentColor">表紙カラー</label><input id="accentColor" name="accentColor" type="color" value="#d84f45" /></div>
+            <div class="movie-builder">
+              <div class="builder-head">
+                <div>
+                  <label>映画リスト</label>
+                  <p class="image-format-note">映画ごとにタイトル、紹介文、画像、詳細文を入れられます。</p>
+                </div>
+              </div>
+              <div id="movieItemsEditor" class="movie-items-editor"></div>
+            </div>
+            <div class="field add-movie-field">
+              <button class="secondary-btn" id="addMovieBtn" type="button">映画を追加</button>
+            </div>
+            <div class="field preview-section">
+              <label>投稿プレビュー</label>
+              <div id="postPreview" class="post-preview"></div>
+            </div>
+            <button class="primary-btn" type="submit">投稿を追加</button>
+          </form>
+        </div>
+      </section>
+
+    </main>
+    <dialog id="detailDialog" class="detail-dialog"><button class="dialog-close" aria-label="閉じる">×</button><div id="dialogContent"></div></dialog>
+    <script src="app.js"></script>
+  </body>
+</html>
